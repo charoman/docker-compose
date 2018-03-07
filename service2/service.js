@@ -1,26 +1,16 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const db = require("./db");
 const cors = require("cors");
 const app = express();
 
 app.use(cors());
+app.listen(8080);
+mongoose.connect("mongodb://mongo:27017/service2");
+db.initDb();
 
 app.get("/", function (req, res) {
-    res.json({
-        users: [
-            {
-                username: "adfasdfad",
-                password: "adsfadfa3423452sd@2"
-            },
-            {
-                username: "adfasdfad",
-                password: "adsfadfa3423452sd@2"
-            },
-            {
-                username: "roaasdfajsdkfnsd",
-                password: "adsfadfaasdasd@2"
-            }
-        ]
+    db.User.find({}).then(function (users) {
+        res.json({users: users});
     });
 });
-
-app.listen(8080);

@@ -1,6 +1,6 @@
 angular.module("app", []).component("tableComponent", {
     templateUrl: "/table.html",
-    bindings: {port: "<"},
+    bindings: {port: "<", title: "<"},
     controller: ["$http", TableComponent]
 });
 
